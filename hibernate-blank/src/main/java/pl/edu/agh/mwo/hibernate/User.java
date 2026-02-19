@@ -104,54 +104,15 @@ public class User {
     }
 
     public void addFriend(User user) {
-        if (user == null || user == this) {return;}
-        if (this.friends.add(user)) {
-            user.friends.add(this);
-        }
+        this.friends.add(user);
     }
 
     public void removeFriend (User user) {
-        if (user == null || user == this) {return;}
-        if (this.friends.remove(user)) {
-            user.friends.remove(this);
-        }
+        this.friends.remove(user);
     }
 
     public boolean isFriendWith(User user) {
         return user != null && friends.contains(user);
     }
-
-//    public void likePhoto(Photo photo) {
-//        if (photo == null) return;
-//
-//        // Wymaga: Photo -> Album -> User
-//        Album album = photo.getAlbum();
-//        if (album == null) {
-//            throw new IllegalStateException("Photo nie ma ustawionego albumu - nie da się sprawdzić właściciela.");
-//        }
-//
-//        User owner = album.getOwner(); // albo getUser(), zależnie jak nazwałeś
-//        if (owner == null) {
-//            throw new IllegalStateException("Album nie ma ustawionego właściciela - nie da się sprawdzić znajomości.");
-//        }
-//
-//        boolean canLike = this.equals(owner) || this.isFriendWith(owner);
-//        if (!canLike) {
-//            throw new IllegalStateException("Możesz polubić tylko zdjęcie znajomego (lub swoje).");
-//        }
-//
-//        // Spójność obu stron:
-//        if (likedPhotos.add(photo)) {
-//            photo.getLikedByUsers().add(this); // Wymaga: Photo ma kolekcję likedByUsers
-//        }
-//    }
-//
-//    public void unlikePhoto(Photo photo) {
-//        if (photo == null) return;
-//
-//        if (likedPhotos.remove(photo)) {
-//            photo.getLikedByUsers().remove(this); // spójność
-//        }
-//    }
 
 }
