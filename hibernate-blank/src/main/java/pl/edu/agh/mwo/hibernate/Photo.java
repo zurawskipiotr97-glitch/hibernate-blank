@@ -25,7 +25,7 @@ public class Photo {
             joinColumns = @JoinColumn(name = "photo_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> likedPhotos = new HashSet<User>();
+    private Set<User> users = new HashSet<User>();
 
 
 }
