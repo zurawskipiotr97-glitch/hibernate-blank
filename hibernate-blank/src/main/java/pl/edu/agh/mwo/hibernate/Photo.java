@@ -11,27 +11,22 @@ public class Photo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column
     private String name;
 
     @Column
-    private Date date;
+    private Date date = new Date();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "likedPhotos",
-            joinColumns = @JoinColumn(name = "photo_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<User> users = new HashSet<User>();
+    @ManyToMany(mappedBy = "likedPhotos")
+    private Set<User> likedByUsers = new HashSet<>();
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,19 +46,20 @@ public class Photo {
         this.date = date;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<User> getLikedByUsers() {
+        return likedByUsers;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setLikedByUsers(Set<User> users) {
+        this.likedByUsers = users;
     }
 
-    public void addUser(User user) {
-        users.add(user);
+    public void addLikingUser(User user) {
+        likedByUsers.add(user);
     }
 
-    public void removeUser(User user) {
-        users.remove(user);
+    public void removeLikingUser(User user) {
+        likedByUsers.remove(user);
     }
+
 }
