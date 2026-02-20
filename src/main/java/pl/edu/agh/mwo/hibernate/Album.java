@@ -22,6 +22,18 @@ public class Album {
     @JoinColumn(name = "album_id")
     private Set<Photo> photos = new HashSet<Photo>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public long getId() {
         return id;
     }
@@ -61,4 +73,16 @@ public class Album {
     public void removePhoto(Photo photo) {
         photos.remove(photo);
     }
+
+//    public void addPhotoManyToOne(Photo photo) {
+//        photos.add(photo);
+//        photo.setAlbum(this);
+//    }
+//
+//    public void removePhotoManyToOne(Photo photo) {
+//        photos.remove(photo);
+//        if (photo.getAlbum() == this) {
+//            photo.setAlbum(null);
+//        }
+//    }
 }

@@ -22,6 +22,18 @@ public class Photo {
     @ManyToMany(mappedBy = "likedPhotos")
     private Set<User> likedByUsers = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "album_id", insertable = false, updatable = false)
+    private Album album;
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
     public long getId() {
         return id;
     }
