@@ -74,15 +74,4 @@ public class Album {
         photos.remove(photo);
     }
 
-//    public void addPhotoManyToOne(Photo photo) {
-//        photos.add(photo);
-//        photo.setAlbum(this);
-//    }
-//
-//    public void removePhotoManyToOne(Photo photo) {
-//        photos.remove(photo);
-//        if (photo.getAlbum() == this) {
-//            photo.setAlbum(null);
-//        }
-//    }
 }

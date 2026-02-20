@@ -114,19 +114,4 @@ public class User {
     public boolean isFriendWith(User user) {
         return user != null && friends.contains(user);
     }
-
-//    public void addAlbumManyToOne(Album album) {
-//        albums.add(album);
-//        album.setUser(this);
-//    }
-//
-//    public void removeAlbumManyToOne(Album album) {
-//        albums.remove(album);
-//        if (album.getUser() == this) {
-//            album.setUser(null);
-//        }
-//    }
-
-
-
 }
