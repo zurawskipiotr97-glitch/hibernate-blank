@@ -17,22 +17,24 @@ public class Main {
 		main.addNewData();
 		main.printState("Po addNewData");
 
-//		main.case1_removeLike();
-//		main.printState("Po case1_removeLike");
+		main.case1_removeLike();
+		main.printState("Po case1_removeLike");
 
-//		main.case2_deletePhoto();
-//		main.printState("Po case2_deletePhoto");
-//
+		main.case2_deletePhoto();
+		main.printState("Po case2_deletePhoto");
+
 		main.case3_deleteAlbum();
 		main.printState("Po case3_deleteAlbum");
-//
-//		main.case4_deleteUser();
-//		main.printState("Po case4_deleteUser");
-//
-//		main.executeQueries();
 
-		// tu wstaw kod aplikacji
-		
+		main.case4_deleteUser();
+		main.printState("Po case4_deleteUser");
+
+//		main.case52_likeWhenAreFriends();
+//		main.printState("case52_likeWhenAreFriends");
+//
+//		main.case51_likeWhenNonFriends();
+//		main.printState("Po case51_likewhennonFriends");
+
 		main.close();
 	}
 
@@ -199,4 +201,22 @@ public class Main {
 		session.delete(album);
 		deleteTransaction.commit();
 	}
+
+	private void case4_deleteUser() {
+		Transaction deleteTransaction = session.beginTransaction();
+
+		User user = session.createQuery(
+				"from User u where u.username='alice'", User.class)
+				.uniqueResult();
+
+		for (User u : user.getFriends()) {
+			u.removeFriend(user);
+			user.removeFriend(u);
+		}
+
+		session.delete(user);
+		deleteTransaction.commit();
+	}
+
+
 }
