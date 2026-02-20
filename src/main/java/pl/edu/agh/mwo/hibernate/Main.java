@@ -181,11 +181,22 @@ public class Main {
 		Transaction deleteTransaction = session.beginTransaction();
 
 		Album album = session.createQuery(
-						"from Album a where a.name='Alice Album 1'", Album.class)
+				"from Album a where a.name='Alice Album 1'", Album.class)
 				.uniqueResult();
+
+		for (Photo p : album.getPhotos()){
+			for (User u : p.getLikedByUsers()){
+				u.removeLikedPhoto(p);
+			}
+		}
+
+		User user = session.createQuery(
+				"Select u from User u inner join u.albums a where a.name='Alice Album 1'", User.class)
+				.uniqueResult();
+
+		user.getAlbums().remove(album);
 
 		session.delete(album);
 		deleteTransaction.commit();
-
 	}
 }
