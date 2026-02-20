@@ -19,12 +19,12 @@ public class Main {
 
 //		main.case1_removeLike();
 //		main.printState("Po case1_removeLike");
-//
+
 //		main.case2_deletePhoto();
 //		main.printState("Po case2_deletePhoto");
 //
-//		main.case3_deleteAlbum();
-//		main.printState("Po case3_deleteAlbum");
+		main.case3_deleteAlbum();
+		main.printState("Po case3_deleteAlbum");
 //
 //		main.case4_deleteUser();
 //		main.printState("Po case4_deleteUser");
@@ -141,5 +141,51 @@ public class Main {
                 }
             }
         }
+	}
+
+	private void case1_removeLike() {
+		User bob = session.createQuery(
+				"from User u where u.username='bob'", User.class)
+				.uniqueResult();
+
+		Photo photo = session.createQuery(
+				"from Photo p where p.name='alice_photo_1'", Photo.class)
+				.uniqueResult();
+
+		bob.getLikedPhotos().remove(photo);
+
+		Transaction deleteTransaction = session.beginTransaction();
+		deleteTransaction.commit();
+	}
+
+	private void case2_deletePhoto() {
+		Photo photo = session.createQuery(
+				"from Photo p where p.name='bob_photo_1'", Photo.class)
+				.uniqueResult();
+
+		Transaction deleteTransaction = session.beginTransaction();
+		for (User u : photo.getLikedByUsers()) {
+			u.removeLikedPhoto(photo);
+		}
+		Album album = session.createQuery(
+				"Select a from Album a inner join a.photos p where p.name='bob_photo_1'", Album.class)
+				.uniqueResult();
+
+		album.getPhotos().remove(photo);
+
+		session.delete(photo);
+		deleteTransaction.commit();
+	}
+
+	private	void case3_deleteAlbum() {
+		Transaction deleteTransaction = session.beginTransaction();
+
+		Album album = session.createQuery(
+						"from Album a where a.name='Alice Album 1'", Album.class)
+				.uniqueResult();
+
+		session.delete(album);
+		deleteTransaction.commit();
+
 	}
 }
