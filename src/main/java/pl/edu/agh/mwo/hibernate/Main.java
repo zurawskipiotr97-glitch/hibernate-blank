@@ -13,8 +13,6 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 
-//		HQL version for Laboratories without ManyToOne
-
 		//Add New Data
 		main.databaseRESET();
 		main.addNewData();
@@ -50,7 +48,7 @@ public class Main {
 		main.case5_likeWhenFriends("bob", "alice", "alice_photo_2");
 		main.printState("Po case5_likeWhenFriends");
 
-// Like when NOT FRIENDS (should be blocked)
+		// Like when NOT FRIENDS (should be blocked)
 		main.preparing();
 		main.case6_likeWhenNonFriends("charlie", "alice", "alice_photo_2");
 		main.printState("Po case6_likeWhenNonFriends");
